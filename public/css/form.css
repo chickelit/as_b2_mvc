@@ -1,0 +1,136 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+:root {
+  --primary-color: #0099ff;
+  --font-dark: #232323;
+  --font-normal: #6c6c6c;
+  --font-light: #969696;
+  --font-colored: #0099ff;
+  --border-colored: #0099ff;
+  --border-normal: #d9d9d9;
+}
+
+body {
+  font-family: Poppins, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  display: grid;
+  grid-auto-rows: max-content;
+  justify-items: center;
+  align-content: center;
+  gap: 16px;
+}
+
+.container {
+  width: 448px;
+  box-shadow: 0 3px 17px 0 rgba(0, 0, 0, 0.15);
+  border-radius: 16px;
+  padding: 48px 36px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  gap: 32px;
+}
+
+form {
+  margin: 0;
+  width: 100%;
+  display: grid;
+  gap: 20px;
+}
+
+.form-header {
+  width: 100%;
+  display: grid;
+  gap: 12px;
+}
+
+.form-footer span {
+  color: var(--font-light);
+  font-size: 18px;
+  line-height: 27px;
+}
+
+.form-footer span a {
+  color: var(--font-colored);
+  font-weight: 500;
+  text-underline-offset: 3px;
+}
+
+h1 {
+  margin: 0 !important;
+  color: var(--font-dark);
+}
+
+p {
+  margin: 0;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 150%;
+  color: var(--font-light);
+  /* word-wrap: break-word; */
+  /* white-space: nowrap; */
+}
+
+.form-field {
+  position: relative;
+  display: grid;
+  grid-auto-flow: row;
+  gap: 0.25rem;
+}
+
+.error-slot {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  transform: translateY(100%);
+  font-size: 14px;
+  line-height: 21px;
+  color: #ee2c25;
+}
+
+label {
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  outline: none;
+  padding: 16px;
+  color: var(--font-normal);
+  font-size: 18px;
+  line-height: 150%;
+  border-radius: 4px;
+  border: 1px solid var(--border-normal);
+  transition: border 0.15s linear;
+}
+
+input:focus {
+  border-color: var(--border-colored);
+}
+
+form > button[type="submit"] {
+	margin-top: 12px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  padding: 16px;
+  background: var(--primary-color);
+  color: white;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 120%;
+  transition: all 0.15s linear;
+}
+
+form > button[type="submit"]:hover {
+  opacity: 0.85;
+}

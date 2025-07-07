@@ -1,0 +1,72 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/form.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-header">
+        <h1>Cadastro</h1>
+        <p>Cadastre-se para aproveitas nossos serviços.</p>
+      </div>
+      <form autocomplete="off" method="post" action="/api/sign-up" enctype="application/x-www-form-urlencoded">
+        <div class="form-field">
+          <label for="name">Nome</label>
+          <input name="name" type="text" placeholder="Fulano" />
+					<div class="error-slot"></div>
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input name="email" type="email" placeholder="marilia@gmail.com" />
+					<div class="error-slot"></div>
+        </div>
+        <div class="form-field">
+          <label for="password">Senha</label>
+          <input name="password" type="password" placeholder="********" />
+					<div class="error-slot"></div>
+        </div>
+        <button type="submit">Entrar</button>
+      </form>
+    </div>
+    <div class="form-footer">
+      <span>Já tem uma conta? <a href="/sign-in">Entrar</a></span>
+    </div>
+
+    <script>
+      const hErrors =
+      {{{json errors}}}
+      const hForm =
+      {{{json form}}}
+      const form = document.forms[0];
+			const er = hErrors.find((e) => !e.isValidationError)
+
+			er && alert(er.message)
+
+			for (const [key, value] of Object.entries(hForm)) {
+				const field = form.elements.namedItem(key); 
+
+				if (!field) continue; 
+
+				field.value = value;
+			}
+
+			for (const error of hErrors) { 
+				const field = form.elements.namedItem(error.path); 
+
+				if (!field) continue; 
+
+				field.parentElement.querySelector(".error-slot").textContent = error.message; 
+
+				function handler(event) {
+					event.currentTarget.parentElement.querySelector(".error-slot").textContent = "";
+
+					field.removeEventListener("focus", handler);
+				}
+
+				field.addEventListener("focus", handler);
+			} 
+    </script>
+  </body>
+</html>
