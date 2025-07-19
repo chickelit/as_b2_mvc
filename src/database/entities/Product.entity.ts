@@ -9,12 +9,11 @@ export class Product {
   name!: string;
 
   @Column("decimal")
-  preco!: string;
+  preco!: number;
 
   @Column()
   descricao!: string;
 
-  @Column({ nullable: true })
-  fileName!: string;
-
+  @Column("text", { nullable: true })
+  image?: string;
 }

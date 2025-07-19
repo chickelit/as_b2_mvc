@@ -12,8 +12,6 @@ export class DashboardProductController {
       search: request.query.search as string,
     });
 
-    console.log(productsWithPagination);
-
     return response.render("dashboard/products", { layout: "_layout", productsWithPagination });
   }
 
@@ -30,13 +28,22 @@ export class DashboardProductController {
     const { data: body, error } = z
       .object({
         name: z.string(),
-        description: z.string(),
-        price: z.number(),
+        descricao: z.string(),
+        preco: z.string().transform((value) => parseFloat(value)),
+        image: z.string().or(z.undefined()),
       })
       .safeParse(request.body);
 
-    if (error)
+    if (error) {
+      console.log(error);
       return response.render("dashboard/products/create", { layout: "_layout", errors: ErrorParser.zodToApi(error), form: request.body });
+    }
+
+    if (request.file) {
+      const base64Image = request.file.buffer!.toString("base64");
+
+      body.image = `data:${request.file.mimetype};base64,${base64Image}`;
+    }
 
     const product = await ProductService.create(body);
 
@@ -47,8 +54,8 @@ export class DashboardProductController {
     const { data: body, error } = z
       .object({
         name: z.string(),
-        description: z.string(),
-        price: z.number(),
+        descricao: z.string(),
+        preco: z.string().transform((value) => parseFloat(value)),
       })
       .safeParse(request.body);
 

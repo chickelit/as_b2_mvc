@@ -3,7 +3,7 @@ import { DataSource } from "typeorm";
 
 export const dataSource = new DataSource({
   type: "postgres",
-  url: `postgres://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}?options=-c%20client_encoding%3DUTF8`,
+  url: `postgres://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}?options=-c%20client_encoding%3DWIN1252`,
   // host: process.env.DB_HOST!,
   // port: +process.env.DB_PORT!,
   // username: process.env.DB_USER!,
@@ -15,5 +15,5 @@ export const dataSource = new DataSource({
   ssl: {
     rejectUnauthorized: false,
   },
-  extra: { charset: "UTF8", options: "-c client_encoding=UTF8" },
+  extra: { charset: "WIN1252", options: "-c client_encoding=WIN1252" },
 });

@@ -7,6 +7,7 @@ import hbs from "hbs";
 import { router } from "./routes";
 import { dataSource } from "./database/data-source";
 import { viewRouter } from "./routes/views";
+import multer from "multer";
 
 const app = express();
 const port = +process.env.PORT!;
@@ -22,8 +23,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/static", express.static("public"));
 
 hbs.registerHelper("json", function (context) {
-	console.log("Hey context")
-  console.log(context);
   return JSON.stringify(context);
 });
 
