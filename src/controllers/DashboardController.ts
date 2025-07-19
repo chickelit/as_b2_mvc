@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { dataSource } from "Src/database/data-source";
 import { ErrorParser } from "Src/helpers/ErrorParser";
 import { ProductService } from "Src/services/ProductService";
 import z from "zod";
@@ -11,13 +12,16 @@ export class DashboardProductController {
       search: request.query.search as string,
     });
 
+    console.log(productsWithPagination);
+
     return response.render("dashboard/products", { layout: "_layout", productsWithPagination });
   }
 
   private static async _show(request: Request, response: Response) {
     const product = await ProductService.findById(request.params.id);
 
-    if (!product) return response.render("dashboard/products", { layout: "_layout", errors: [{ message: "Não foi possível visualizar o produto" }] });
+    if (!product)
+      return response.render("dashboard/products", { layout: "_layout", errors: [{ message: "Não foi possível visualizar o produto" }] });
 
     return response.render(`dashboard/products`, { layout: "_layout", product });
   }

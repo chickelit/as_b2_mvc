@@ -3,15 +3,17 @@ import { DataSource } from "typeorm";
 
 export const dataSource = new DataSource({
   type: "postgres",
-  host: process.env.DB_HOST!,
-  port: +process.env.DB_PORT!,
-  username: process.env.DB_USER!,
-  password: process.env.DB_PASS!,
-  database: process.env.DB_NAME!,
+  url: `postgres://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}?options=-c%20client_encoding%3DUTF8`,
+  // host: process.env.DB_HOST!,
+  // port: +process.env.DB_PORT!,
+  // username: process.env.DB_USER!,
+  // password: process.env.DB_PASS!,
+  // database: process.env.DB_NAME!,
   entities: [path.join(__dirname, "./entities/**/*.entity.{js,ts}")],
   synchronize: true,
   logging: true,
-	ssl: {
-		rejectUnauthorized: false,
-	}
+  ssl: {
+    rejectUnauthorized: false,
+  },
+  extra: { charset: "UTF8", options: "-c client_encoding=UTF8" },
 });
