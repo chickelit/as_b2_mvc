@@ -10,7 +10,7 @@ export class ProductService {
     const page = options.page || 1;
     const perPage = options.perPage || 10;
 
-    queryBuilder.where("products.name ILIKE :search", { name: options.search });
+    options.search && queryBuilder.where("products.name ILIKE :search", { name: options.search });
     queryBuilder.offset((page - 1) * perPage);
     queryBuilder.limit(perPage);
 

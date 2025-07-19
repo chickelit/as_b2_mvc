@@ -1,1 +1,0 @@
-<h1>Create product</h1>

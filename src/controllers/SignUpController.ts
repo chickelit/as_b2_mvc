@@ -46,6 +46,6 @@ export class SignUpController {
       }
     );
 
-    response.cookie("authorization", `Bearer ${token}`).redirect("/");
+    response.cookie("authorization", `Bearer ${token}`).redirect("/dashboard/products");
   }
 }

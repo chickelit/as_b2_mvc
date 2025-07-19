@@ -2,7 +2,7 @@ import path from "path";
 import { DataSource } from "typeorm";
 
 export const dataSource = new DataSource({
-  type: "mysql",
+  type: "postgres",
   host: process.env.DB_HOST!,
   port: +process.env.DB_PORT!,
   username: process.env.DB_USER!,
@@ -11,4 +11,7 @@ export const dataSource = new DataSource({
   entities: [path.join(__dirname, "./entities/**/*.entity.{js,ts}")],
   synchronize: true,
   logging: true,
+	ssl: {
+		rejectUnauthorized: false,
+	}
 });
