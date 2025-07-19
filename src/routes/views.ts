@@ -12,6 +12,6 @@ viewRouter.get("/dashboard/products/create", requireAuth({ returnTo: "/sign-in" 
   res.render("dashboard/products/create", { layout: "_layout" })
 );
 viewRouter.get("/dashboard/products/edit", requireAuth({ returnTo: "/sign-in" }), (req, res) =>
-  res.render("dashboard/products/create", { layout: "_layout" })
+  res.render("dashboard/products/edit", { layout: "_layout" })
 );
 viewRouter.get("/", requireAuth({ returnTo: "/sign-in" }), (req, res) => res.render("home", { layout: "_layout", user: req.user }));
