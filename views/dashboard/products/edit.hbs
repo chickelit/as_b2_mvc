@@ -1,0 +1,111 @@
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Editar Produto</title>
+    <style>
+      body {
+        background: linear-gradient(135deg, #6d2e91 0%, #f9c846 100%);
+        font-family: 'Montserrat', Arial, sans-serif;
+        color: #fff;
+        min-height: 100vh;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      h1 {
+        margin-bottom: 24px;
+        font-size: 2.2rem;
+        font-weight: bold;
+        letter-spacing: 2px;
+        color: #fff;
+        text-shadow: 2px 2px 0 #6d2e91;
+      }
+      form {
+        background: rgba(255,255,255,0.15);
+        padding: 32px 24px;
+        border-radius: 24px;
+        box-shadow: 0 4px 24px rgba(109,46,145,0.15);
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        width: 320px;
+      }
+      label {
+        font-weight: 600;
+        color: #f9c846;
+        margin-bottom: 6px;
+      }
+      input, textarea {
+        border: none;
+        border-radius: 12px;
+        padding: 10px;
+        font-size: 1rem;
+        background: #fff;
+        color: #6d2e91;
+        margin-bottom: 8px;
+        box-shadow: 0 2px 8px rgba(109,46,145,0.08);
+      }
+      textarea {
+        resize: vertical;
+        min-height: 60px;
+      }
+      button {
+        background: #f9c846;
+        color: #6d2e91;
+        font-weight: bold;
+        border: none;
+        border-radius: 12px;
+        padding: 12px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background 0.2s;
+        margin-top: 10px;
+      }
+      button:hover {
+        background: #fff;
+        color: #6d2e91;
+        border: 2px solid #f9c846;
+      }
+      a {
+        display: inline-block;
+        margin-top: 18px;
+        color: #fff;
+        background: #6d2e91;
+        padding: 8px 18px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: background 0.2s;
+      }
+      a:hover {
+        background: #f9c846;
+        color: #6d2e91;
+      }
+    </style>
+  </head>
+   <body>
+    <h1>Editar Produto</h1>
+
+    {{!-- Exibe erros de validação --}}
+    {{#if errors}}
+      <ul style="background:#fff3cd; color:#6d2e91; border-radius:12px; padding:16px 24px; margin-bottom:24px; width:320px; box-shadow:0 2px 8px rgba(109,46,145,0.08);">
+        {{#each errors}}
+          <li>{{this.msg}}</li>
+        {{/each}}
+      </ul>
+    {{/if}}
+
+    <form action="/api/dashboard/products/edit/{{product.id}}" method="PUT">
+      <label>Nome:</label>
+      <input type="text" name="name" value="{{product.name}}" required />
+      <label>Descrição:</label>
+      <textarea name="description" required>{{product.description}}</textarea>
+      <label>Preço:</label>
+      <input type="number" name="price" value="{{product.price}}" required step="0.01" />
+      <button type="submit">Salvar</button>
+    </form>
+    <a href="/dashboard/products">Voltar</a>
+  </body>
+</html>

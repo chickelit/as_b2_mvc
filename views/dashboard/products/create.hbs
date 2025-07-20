@@ -1,0 +1,49 @@
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Criar Produto</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body { background: linear-gradient(135deg, #f8d478, #ff8a9f); font-family:
+      'Fredoka', sans-serif; color: #2d1e2f; min-height: 100vh; margin: 0;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; padding: 24px; } h1 { margin-bottom: 24px;
+      font-size: 2.5rem; font-weight: 600; color: #fff; text-shadow: 2px 2px
+      #ff589b; } form { background: #fff; padding: 32px 28px; border-radius:
+      32px; border: 3px solid #ff8a9f; box-shadow: 6px 6px 0 #2d1e2f; display:
+      flex; flex-direction: column; gap: 16px; width: 340px; } label {
+      font-weight: 600; color: #ff589b; font-size: 1.1rem; } input, textarea {
+      border: 2px solid #2d1e2f; border-radius: 16px; padding: 12px; font-size:
+      1rem; background: #fdfdfd; color: #2d1e2f; font-family: 'Fredoka',
+      sans-serif; box-shadow: 2px 2px 0 #ff8a9f; } textarea { resize: vertical;
+      min-height: 70px; } button { background: #ff589b; color: #fff;
+      font-weight: bold; border: none; border-radius: 20px; padding: 12px;
+      font-size: 1.1rem; cursor: pointer; box-shadow: 4px 4px 0 #2d1e2f;
+      transition: all 0.2s; } button:hover { background: #2d1e2f; color: #fff; }
+      a { display: inline-block; margin-top: 20px; background: #fff; color:
+      #ff589b; padding: 10px 20px; border-radius: 20px; font-weight: 600;
+      text-decoration: none; box-shadow: 4px 4px 0 #2d1e2f; transition: all
+      0.2s; } a:hover { background: #ff589b; color: #fff; }
+    </style>
+  </head>
+  <body>
+    <h1>Criar Produto</h1>
+    <form
+      action="/api/dashboard/products/create"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <label>Nome:</label>
+      <input type="text" name="name" required />
+      <label>Descrição:</label>
+      <textarea name="description" required></textarea>
+      <label>Preço:</label>
+      <input type="number" name="price" required step="0.01" />
+      <button type="submit">Salvar</button>
+    </form>
+    <a href="/dashboard/products">Voltar</a>
+  </body>
+</html>
