@@ -97,13 +97,13 @@
       </ul>
     {{/if}}
 
-    <form action="/api/dashboard/products/edit/{{product.id}}" method="PUT">
+    <form action="/api/dashboard/products/edit/{{product.id}}" method="POST">
       <label>Nome:</label>
       <input type="text" name="name" value="{{product.name}}" required />
       <label>Descrição:</label>
-      <textarea name="description" required>{{product.description}}</textarea>
+      <textarea name="descricao" required>{{product.descricao}}</textarea>
       <label>Preço:</label>
-      <input type="number" name="price" value="{{product.price}}" required step="0.01" />
+      <input type="number" name="preco" value="{{product.preco}}" required step="0.01" />
       <button type="submit">Salvar</button>
     </form>
     <a href="/dashboard/products">Voltar</a>

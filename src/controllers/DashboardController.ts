@@ -51,6 +51,18 @@ export class DashboardProductController {
   }
 
   private static async _update(request: Request, response: Response) {
+    const product = await ProductService.findById(request.params.id);
+
+    if (!product)
+      return response.render("dashboard/products", {
+        layout: "_layout",
+        errors: [{ message: "Produto não encontrado" }],
+      });
+
+    if (request.method.toLowerCase() === "get") {
+      return response.render("dashboard/products/edit", { layout: "_layout", product });
+    }
+
     const { data: body, error } = z
       .object({
         name: z.string(),
@@ -61,14 +73,6 @@ export class DashboardProductController {
 
     if (error)
       return response.render("dashboard/products/edit", { layout: "_layout", errors: ErrorParser.zodToApi(error), form: request.body });
-
-    const product = await ProductService.findById(request.params.id);
-
-    if (!product)
-      return response.render("dashboard/products", {
-        layout: "_layout",
-        errors: [{ message: "Produto não encontrado" }],
-      });
 
     const updatedProduct = await ProductService.update(product, body);
 

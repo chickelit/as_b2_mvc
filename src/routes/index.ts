@@ -11,7 +11,7 @@ const upload = multer();
 router.post("/sign-up", SignUpController.create);
 router.post("/sign-in", SignInController.create);
 router.post("/dashboard/products/create", requireAuth({ returnTo: "/sign-in" }), upload.single("image"), DashboardProductController.store);
-router.put(
+router.post(
   "/dashboard/products/edit/:id",
   requireAuth({ returnTo: "/sign-in" }),
   upload.single("image"),

@@ -131,18 +131,17 @@
       <div class="card">
         <h2>Produto</h2>
         <p>Nome: {{product.name}}</p>
-        <p>Descrição: {{product.description}}</p>
-        <p>Preço: {{product.price}}</p>
-        <a href="/dashboard/products/edit/{{product.id}}">Editar</a>
-        <a href="/dashboard/products">Voltar</a>
+        <p>Descrição: {{product.descricao}}</p>
+        <p>Preço: {{product.preco}}</p>
+        <a href="/">Voltar</a>
       </div>
     {{!-- Lista de produtos --}}
     {{else if productsWithPagination}}
       <ul class="products-list">
-        {{#each productsWithPagination}}
+        {{#each productsWithPagination.products}}
           <li>
-            <a href="/dashboard/products?id={{this.id}}">{{this.name}}</a>
-            <span>{{this.price}}</span>
+            <a href="/show/{{this.id}}">{{this.name}}</a>
+            <span>{{this.preco}}</span>
           </li>
         {{/each}}
       </ul>
