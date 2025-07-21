@@ -91,7 +91,8 @@ console.log(product)
 
     const deletedProduct = await ProductService.delete(product);
 
-    return response.render("dashboard/products", { layout: "_layout", deletedProduct: deletedProduct });
+    console.log("odio")
+    return response.redirect("/dashboard/products");
   }
 
   public static index = DashboardProductController._index.bind(DashboardProductController);
