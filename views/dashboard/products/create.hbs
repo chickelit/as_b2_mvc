@@ -1,32 +1,128 @@
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
-    <title>Criar Produto</title>
+    <title>Ame Açaí - Criar Produto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap"
       rel="stylesheet"
     />
     <style>
-      body { background: linear-gradient(135deg, #f8d478, #ff8a9f); font-family:
-      'Fredoka', sans-serif; color: #2d1e2f; min-height: 100vh; margin: 0;
-      display: flex; flex-direction: column; align-items: center;
-      justify-content: center; padding: 24px; } h1 { margin-bottom: 24px;
-      font-size: 2.5rem; font-weight: 600; color: #fff; text-shadow: 2px 2px
-      #ff589b; } form { background: #fff; padding: 32px 28px; border-radius:
-      32px; border: 3px solid #ff8a9f; box-shadow: 6px 6px 0 #2d1e2f; display:
-      flex; flex-direction: column; gap: 16px; width: 340px; } label {
-      font-weight: 600; color: #ff589b; font-size: 1.1rem; } input, textarea {
-      border: 2px solid #2d1e2f; border-radius: 16px; padding: 12px; font-size:
-      1rem; background: #fdfdfd; color: #2d1e2f; font-family: 'Fredoka',
-      sans-serif; box-shadow: 2px 2px 0 #ff8a9f; } textarea { resize: vertical;
-      min-height: 70px; } button { background: #ff589b; color: #fff;
-      font-weight: bold; border: none; border-radius: 20px; padding: 12px;
-      font-size: 1.1rem; cursor: pointer; box-shadow: 4px 4px 0 #2d1e2f;
-      transition: all 0.2s; } button:hover { background: #2d1e2f; color: #fff; }
-      a { display: inline-block; margin-top: 20px; background: #fff; color:
-      #ff589b; padding: 10px 20px; border-radius: 20px; font-weight: 600;
-      text-decoration: none; box-shadow: 4px 4px 0 #2d1e2f; transition: all
-      0.2s; } a:hover { background: #ff589b; color: #fff; }
+      :root {
+        --roxo: #6d2e91;
+        --rosa: #ff4f81;
+        --verde: #60c28b;
+        --branco: #ffffff;
+        --cinza-claro: #f7f7f7;
+        --cinza: #e0e0e0;
+        --texto: #2d1e2f;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: 'Fredoka', sans-serif;
+        background: var(--cinza-claro);
+        color: var(--texto);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 16px;
+      }
+
+      h1 {
+        font-size: 2.4rem;
+        font-weight: 600;
+        color: var(--roxo);
+        margin-bottom: 32px;
+        text-align: center;
+      }
+
+      form {
+        background: var(--branco);
+        padding: 32px;
+        border-radius: 24px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        width: 100%;
+        max-width: 440px;
+        border: 2px solid var(--rosa);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      label {
+        font-weight: 600;
+        color: var(--roxo);
+        font-size: 1rem;
+      }
+
+      input,
+      textarea {
+        padding: 14px 16px;
+        border-radius: 12px;
+        border: 2px solid var(--cinza);
+        background: var(--branco);
+        font-family: 'Fredoka', sans-serif;
+        font-size: 1rem;
+        transition: border 0.2s, box-shadow 0.2s;
+      }
+
+      input:focus,
+      textarea:focus {
+        border-color: var(--roxo);
+        box-shadow: 0 0 0 3px rgba(109, 46, 145, 0.1);
+        outline: none;
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 90px;
+      }
+
+      button {
+        background: var(--rosa);
+        color: var(--branco);
+        font-weight: bold;
+        font-size: 1.1rem;
+        padding: 14px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(255, 79, 129, 0.3);
+        transition: background 0.2s ease;
+      }
+
+      button:hover {
+        background: var(--roxo);
+      }
+
+      a {
+        margin-top: 20px;
+        text-align: center;
+        text-decoration: none;
+        color: var(--roxo);
+        font-weight: 600;
+        font-size: 1rem;
+        transition: color 0.2s;
+        display: block;
+      }
+
+      a:hover {
+        color: var(--rosa);
+      }
     </style>
   </head>
   <body>
@@ -36,14 +132,42 @@
       method="POST"
       enctype="multipart/form-data"
     >
-      <label>Nome:</label>
-      <input type="text" name="name" required />
-      <label>Descrição:</label>
-      <textarea name="descricao" required></textarea>
-      <label>Preço:</label>
-      <input type="number" name="preco" required step="0.01" />
-      <button type="submit">Salvar</button>
+      <div class="form-group">
+        <label for="name">Nome</label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="Ex: Açaí com banana"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <textarea
+          name="descricao"
+          id="descricao"
+          placeholder="Descreva o produto com carinho..."
+          required
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="preco">Preço</label>
+        <input
+          type="number"
+          name="preco"
+          id="preco"
+          placeholder="Ex: 12.99"
+          step="0.01"
+          required
+        />
+      </div>
+
+      <button type="submit">Salvar Produto</button>
     </form>
-    <a href="/dashboard/products">Voltar</a>
+
+    <a href="/dashboard/products">← Voltar para a lista de produtos</a>
   </body>
 </html>

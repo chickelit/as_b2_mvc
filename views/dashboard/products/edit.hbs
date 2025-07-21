@@ -1,111 +1,127 @@
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
-    <title>Editar Produto</title>
+    <title>Ame Açaí - Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
     <style>
-      body {
-        background: linear-gradient(135deg, #6d2e91 0%, #f9c846 100%);
-        font-family: 'Montserrat', Arial, sans-serif;
-        color: #fff;
-        min-height: 100vh;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-      h1 {
-        margin-bottom: 24px;
-        font-size: 2.2rem;
-        font-weight: bold;
-        letter-spacing: 2px;
-        color: #fff;
-        text-shadow: 2px 2px 0 #6d2e91;
-      }
-      form {
-        background: rgba(255,255,255,0.15);
-        padding: 32px 24px;
-        border-radius: 24px;
-        box-shadow: 0 4px 24px rgba(109,46,145,0.15);
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-        width: 320px;
-      }
-      label {
-        font-weight: 600;
-        color: #f9c846;
-        margin-bottom: 6px;
-      }
-      input, textarea {
-        border: none;
-        border-radius: 12px;
-        padding: 10px;
-        font-size: 1rem;
-        background: #fff;
-        color: #6d2e91;
-        margin-bottom: 8px;
-        box-shadow: 0 2px 8px rgba(109,46,145,0.08);
-      }
-      textarea {
-        resize: vertical;
-        min-height: 60px;
-      }
-      button {
-        background: #f9c846;
-        color: #6d2e91;
-        font-weight: bold;
-        border: none;
-        border-radius: 12px;
-        padding: 12px;
-        font-size: 1.1rem;
-        cursor: pointer;
-        transition: background 0.2s;
-        margin-top: 10px;
-      }
-      button:hover {
-        background: #fff;
-        color: #6d2e91;
-        border: 2px solid #f9c846;
-      }
-      a {
-        display: inline-block;
-        margin-top: 18px;
-        color: #fff;
-        background: #6d2e91;
-        padding: 8px 18px;
-        border-radius: 12px;
-        text-decoration: none;
-        font-weight: 600;
-        transition: background 0.2s;
-      }
-      a:hover {
-        background: #f9c846;
-        color: #6d2e91;
-      }
+      :root { --roxo: #6d2e91; --rosa: #ff4f81; --verde: #60c28b; --branco:
+      #ffffff; --cinza-claro: #f7f7f7; --texto: #2d1e2f; } * { box-sizing:
+      border-box; margin: 0; padding: 0; } body { font-family: 'Fredoka',
+      sans-serif; background: var(--cinza-claro); color: var(--texto);
+      min-height: 100vh; padding: 24px; display: flex; flex-direction: column;
+      align-items: center; } header { width: 100%; max-width: 960px;
+      margin-bottom: 32px; text-align: center; } header h1 { font-size: 2.5rem;
+      color: var(--roxo); margin-bottom: 8px; } header span { color:
+      var(--rosa); } nav ul { list-style: none; display: flex; justify-content:
+      center; gap: 16px; margin-top: 12px; } nav a { text-decoration: none;
+      font-weight: 600; color: var(--roxo); padding: 8px 16px; border-radius:
+      8px; transition: 0.2s; } nav a:hover { background-color: var(--roxo);
+      color: var(--branco); } .add-btn { display: inline-block; background:
+      var(--rosa); color: var(--branco); padding: 12px 24px; border-radius:
+      12px; font-weight: 600; font-size: 1rem; text-decoration: none;
+      margin-bottom: 32px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition:
+      background 0.2s; } .add-btn:hover { background: var(--roxo); } .card, form
+      { background: var(--branco); border-radius: 16px; padding: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05); max-width: 600px; width: 100%;
+      margin-bottom: 24px; } .card h2, form h2 { font-size: 1.5rem; color:
+      var(--roxo); margin-bottom: 12px; } .card p { margin-bottom: 8px;
+      font-size: 1.05rem; } .card a { display: inline-block; margin-top: 16px;
+      margin-right: 12px; padding: 10px 20px; background: var(--verde); color:
+      var(--branco); border-radius: 8px; text-decoration: none; font-weight:
+      600; transition: background 0.2s; } .card a:last-child { background:
+      var(--rosa); } .card a:hover { background: var(--roxo); } label {
+      font-weight: 600; color: var(--roxo); display: block; margin-top: 12px; }
+      input, textarea { width: 100%; padding: 10px; border-radius: 8px; border:
+      1px solid #ccc; margin-top: 6px; margin-bottom: 12px; font-size: 1rem; }
+      button { background: var(--verde); color: var(--branco); font-weight:
+      bold; border: none; border-radius: 8px; padding: 12px; font-size: 1rem;
+      cursor: pointer; transition: background 0.2s; } button:hover { background:
+      var(--roxo); } ul.products-list { list-style: none; padding: 0; width:
+      100%; max-width: 600px; } ul.products-list li { background: var(--branco);
+      border: 1px solid #eee; border-radius: 12px; padding: 16px 20px;
+      margin-bottom: 16px; display: flex; justify-content: space-between;
+      align-items: center; transition: box-shadow 0.2s; } ul.products-list
+      li:hover { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); } ul.products-list
+      li a { color: var(--roxo); font-weight: 600; text-decoration: none; }
+      ul.products-list li a:hover { text-decoration: underline; } .error-list {
+      background: #ffeaea; color: #a10000; padding: 16px 24px; border-radius:
+      12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 24px; width:
+      100%; max-width: 600px; }
     </style>
   </head>
-   <body>
-    <h1>Editar Produto</h1>
+  <body>
+    <header>
+      <h1>Ame <span>Açaí</span></h1>
+      <nav>
+        <ul>
+          <li><a href="/dashboard/products">Produtos</a></li>
+        </ul>
+      </nav>
+    </header>
 
-    {{!-- Exibe erros de validação --}}
     {{#if errors}}
-      <ul style="background:#fff3cd; color:#6d2e91; border-radius:12px; padding:16px 24px; margin-bottom:24px; width:320px; box-shadow:0 2px 8px rgba(109,46,145,0.08);">
+      <ul class="error-list">
         {{#each errors}}
           <li>{{this.msg}}</li>
         {{/each}}
       </ul>
     {{/if}}
 
-    <form action="/api/dashboard/products/edit/{{product.id}}" method="POST">
-      <label>Nome:</label>
-      <input type="text" name="name" value="{{product.name}}" required />
-      <label>Descrição:</label>
-      <textarea name="descricao" required>{{product.descricao}}</textarea>
-      <label>Preço:</label>
-      <input type="number" name="preco" value="{{product.preco}}" required step="0.01" />
-      <button type="submit">Salvar</button>
-    </form>
-    <a href="/dashboard/products">Voltar</a>
+
+    {{#if success}}
+      <div
+        style="background:#e6ffe6; color:#2d1e2f; border-radius:12px; padding:16px 24px; margin-bottom:24px; width:100%; max-width:600px; box-shadow:0 2px 8px rgba(0,0,0,0.05);"
+      >
+        {{success}}
+      </div>
+    {{/if}}
+
+
+    {{#if product}}
+      <form action="/api/dashboard/products/edit/{{product.id}}" method="POST">
+        <h2>Editar Produto</h2>
+        <label for="name">Nome:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value="{{product.name}}"
+          required
+        />
+
+        <label for="descricao">Descrição:</label>
+        <textarea
+          id="descricao"
+          name="descricao"
+          required
+        >{{product.descricao}}</textarea>
+
+        <label for="preco">Preço:</label>
+        <input
+          type="number"
+          id="preco"
+          name="preco"
+          value="{{product.preco}}"
+          step="0.01"
+          required
+        />
+
+        <button type="submit">Salvar</button>
+      </form>
+      <a href="/dashboard/products">Voltar</a>
+    {{else if productsWithPagination}}
+      <ul class="products-list">
+        {{#each productsWithPagination.products}}
+          <li>
+            <a href="/dashboard/products/show/{{this.id}}">{{this.name}}</a>
+            <span>R$ {{this.preco}}</span>
+          </li>
+        {{/each}}
+      </ul>
+    {{/if}}
   </body>
 </html>

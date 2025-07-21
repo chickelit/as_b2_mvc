@@ -76,7 +76,7 @@ export class DashboardProductController {
 
     const updatedProduct = await ProductService.update(product, body);
 
-    return response.render("dashboard/products/edit", { layout: "_layout", updatedProduct });
+    return response.redirect("/dashboard/products");
   }
 
   private static async _destroy(request: Request, response: Response) {

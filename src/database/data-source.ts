@@ -1,5 +1,6 @@
 import path from "path";
 import { DataSource } from "typeorm";
+import { User } from "./entities/User.entity";
 
 export const dataSource = new DataSource({
   type: "postgres",
@@ -9,7 +10,7 @@ export const dataSource = new DataSource({
   // username: process.env.DB_USER!,
   // password: process.env.DB_PASS!,
   // database: process.env.DB_NAME!,
-  entities: [path.join(__dirname, "./entities/**/*.entity.{js,ts}")],
+  entities: [User, path.join(__dirname, "./entities/**/*.entity.{js,ts}")],
   synchronize: true,
   logging: true,
   ssl: {
