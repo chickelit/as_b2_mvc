@@ -81,7 +81,8 @@ export class DashboardProductController {
 
   private static async _destroy(request: Request, response: Response) {
     const product = await ProductService.findById(request.params.id);
-
+console.log(request.params.id)
+console.log(product)
     if (!product)
       return response.render("dashboard/products", {
         layout: "_layout",

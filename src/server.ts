@@ -1,13 +1,15 @@
+import "express-async-errors";
+
 require("dotenv").config();
 
 import path from "path";
-import express from "express";
+import express, { ErrorRequestHandler } from "express";
 import cors from "cors";
 import hbs from "hbs";
 import { router } from "./routes";
 import { dataSource } from "./database/data-source";
 import { viewRouter } from "./routes/views";
-import multer from "multer";
+import { express_async_errors_middleware } from "./middleware/expressAsyncErrors";
 
 const app = express();
 const port = +process.env.PORT!;
@@ -31,6 +33,8 @@ app.set("views", path.join(__dirname, "../views"));
 
 app.use("/", viewRouter);
 app.use("/api", router);
+
+app.use(express_async_errors_middleware as ErrorRequestHandler);
 
 app.listen(port, async () => {
   try {

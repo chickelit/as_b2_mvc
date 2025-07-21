@@ -17,3 +17,8 @@ router.post(
   upload.single("image"),
   DashboardProductController.update
 );
+router.delete(
+  "/dashboard/products/delete/:id",
+  requireAuth({ returnTo: "/sign-in" }),
+  DashboardProductController.destroy
+);
