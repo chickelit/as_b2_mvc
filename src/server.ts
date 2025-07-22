@@ -40,7 +40,7 @@ app.listen(port, async () => {
   try {
     await dataSource.initialize();
 
-    console.log(`App listening on port: ${port}`);
+    console.log(`App listening on: http://localhost:${port}`);
   } catch (error) {
     console.error(error);
 
