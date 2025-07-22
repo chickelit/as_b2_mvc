@@ -1,173 +1,196 @@
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Ame Açaí - Criar Produto</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --roxo: #6d2e91;
-        --rosa: #ff4f81;
-        --verde: #60c28b;
-        --branco: #ffffff;
-        --cinza-claro: #f7f7f7;
-        --cinza: #e0e0e0;
-        --texto: #2d1e2f;
-      }
 
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
+<head>
+	<meta charset="UTF-8" />
+	<title>Ame Açaí - Criar Produto</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet" />
+	<style>
+		:root {
+			--roxo: #6d2e91;
+			--rosa: #ff4f81;
+			--verde: #60c28b;
+			--branco: #ffffff;
+			--cinza-claro: #f7f7f7;
+			--cinza: #e0e0e0;
+			--texto: #2d1e2f;
+		}
 
-      body {
-        font-family: 'Fredoka', sans-serif;
-        background: var(--cinza-claro);
-        color: var(--texto);
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 40px 16px;
-      }
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
 
-      h1 {
-        font-size: 2.4rem;
-        font-weight: 600;
-        color: var(--roxo);
-        margin-bottom: 32px;
-        text-align: center;
-      }
+		body {
+			font-family: 'Fredoka', sans-serif;
+			background: var(--cinza-claro);
+			color: var(--texto);
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			padding: 40px 16px;
+		}
 
-      form {
-        background: var(--branco);
-        padding: 32px;
-        border-radius: 24px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-        width: 100%;
-        max-width: 440px;
-        border: 2px solid var(--rosa);
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-      }
+		h1 {
+			font-size: 2.4rem;
+			font-weight: 600;
+			color: var(--roxo);
+			margin-bottom: 32px;
+			text-align: center;
+		}
 
-      .form-group {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
+		form {
+			background: var(--branco);
+			padding: 32px;
+			border-radius: 24px;
+			box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+			width: 100%;
+			max-width: 440px;
+			border: 2px solid var(--rosa);
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+		}
 
-      label {
-        font-weight: 600;
-        color: var(--roxo);
-        font-size: 1rem;
-      }
+		.form-group {
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+		}
 
-      input,
-      textarea {
-        padding: 14px 16px;
-        border-radius: 12px;
-        border: 2px solid var(--cinza);
-        background: var(--branco);
-        font-family: 'Fredoka', sans-serif;
-        font-size: 1rem;
-        transition: border 0.2s, box-shadow 0.2s;
-      }
+		label {
+			font-weight: 600;
+			color: var(--roxo);
+			font-size: 1rem;
+		}
 
-      input:focus,
-      textarea:focus {
-        border-color: var(--roxo);
-        box-shadow: 0 0 0 3px rgba(109, 46, 145, 0.1);
-        outline: none;
-      }
+		input,
+		textarea {
+			padding: 14px 16px;
+			border-radius: 12px;
+			border: 2px solid var(--cinza);
+			background: var(--branco);
+			font-family: 'Fredoka', sans-serif;
+			font-size: 1rem;
+			transition: border 0.2s, box-shadow 0.2s;
+		}
 
-      textarea {
-        resize: vertical;
-        min-height: 90px;
-      }
+		input:focus,
+		textarea:focus {
+			border-color: var(--roxo);
+			box-shadow: 0 0 0 3px rgba(109, 46, 145, 0.1);
+			outline: none;
+		}
 
-      button {
-        background: var(--rosa);
-        color: var(--branco);
-        font-weight: bold;
-        font-size: 1.1rem;
-        padding: 14px;
-        border: none;
-        border-radius: 12px;
-        cursor: pointer;
-        box-shadow: 0 4px 10px rgba(255, 79, 129, 0.3);
-        transition: background 0.2s ease;
-      }
+		textarea {
+			resize: vertical;
+			min-height: 90px;
+		}
 
-      button:hover {
-        background: var(--roxo);
-      }
+		button {
+			background: var(--rosa);
+			color: var(--branco);
+			font-weight: bold;
+			font-size: 1.1rem;
+			padding: 14px;
+			border: none;
+			border-radius: 12px;
+			cursor: pointer;
+			box-shadow: 0 4px 10px rgba(255, 79, 129, 0.3);
+			transition: background 0.2s ease;
+		}
 
-      a {
-        margin-top: 20px;
-        text-align: center;
-        text-decoration: none;
-        color: var(--roxo);
-        font-weight: 600;
-        font-size: 1rem;
-        transition: color 0.2s;
-        display: block;
-      }
+		button:hover {
+			background: var(--roxo);
+		}
 
-      a:hover {
-        color: var(--rosa);
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Criar Produto</h1>
-    <form
-      action="/api/dashboard/products/create"
-      method="POST"
-      enctype="multipart/form-data"
-    >
-      <div class="form-group">
-        <label for="name">Nome</label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          placeholder="Ex: Açaí com banana"
-          required
-        />
-      </div>
+		a {
+			margin-top: 20px;
+			text-align: center;
+			text-decoration: none;
+			color: var(--roxo);
+			font-weight: 600;
+			font-size: 1rem;
+			transition: color 0.2s;
+			display: block;
+		}
 
-      <div class="form-group">
-        <label for="descricao">Descrição</label>
-        <textarea
-          name="descricao"
-          id="descricao"
-          placeholder="Descreva o produto com carinho..."
-          required
-        ></textarea>
-      </div>
+		a:hover {
+			color: var(--rosa);
+		}
 
-      <div class="form-group">
-        <label for="preco">Preço</label>
-        <input
-          type="number"
-          name="preco"
-          id="preco"
-          placeholder="Ex: 12.99"
-          step="0.01"
-          required
-        />
-      </div>
+		.upload-label {
+			width: 100%;
+			text-align: center;
+			display: inline-block;
+			padding: 10px 20px;
+			background-color: #2563eb;
+			color: white;
+			cursor: pointer;
+			border-radius: 32px;
+			font-weight:
+				bold;
+		}
 
-      <button type="submit">Salvar Produto</button>
-    </form>
+		.file-upload {}
 
-    <a href="/dashboard/products">← Voltar para a lista de produtos</a>
-  </body>
+		.preview-area {
+			margin-top: 15px;
+		}
+
+		.preview-area img {
+			object-fit: cover;
+			max-height: 160px;
+			aspect-ratio: 1 / 1;
+			display: block;
+			border: 1px solid #ccc;
+			border-radius: 32px;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Criar Produto</h1>
+	<form action="/api/dashboard/products/create" method="POST" enctype="multipart/form-data">
+		<div class="form-group">
+			<label for="name">Nome</label>
+			<input type="text" name="name" id="name" placeholder="Ex: Açaí com banana" required />
+		</div>
+
+		<div class="form-group">
+			<label for="descricao">Descrição</label>
+			<textarea name="descricao" id="descricao" placeholder="Descreva o produto com carinho..." required></textarea>
+		</div>
+
+		<div class="form-group">
+			<label for="preco">Preço</label>
+			<input type="number" name="preco" id="preco" placeholder="Ex: 12.99" step="0.01" required />
+		</div>
+
+		<div class="file-upload">
+			<label role="button" for="image" class="upload-label">Adicionar imagem (opcional)</label>
+			<input type="file" id="image" name="image" accept="image/*" hidden />
+			<div id="preview" class="preview-area"></div>
+		</div>
+
+		<button type="submit">Salvar Produto</button>
+	</form>
+
+	<a href="/dashboard/products">← Voltar para a lista de produtos</a>
+
+	<script>
+		const fileInput = document.getElementById('image'); const preview = document.getElementById('preview');
+		fileInput.addEventListener('change', () => {
+			const file = fileInput.files[0]; if (file && file.type.startsWith('image/')) {
+				const
+				reader = new FileReader(); reader.onload = (e) => { preview.innerHTML = '<img src="' + e.target.result + '" alt="Image preview">'; };
+				reader.readAsDataURL(file);
+			} else { preview.innerHTML = ''; }
+		});
+	</script>
+</body>
+
 </html>

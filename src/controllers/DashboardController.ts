@@ -68,11 +68,19 @@ export class DashboardProductController {
         name: z.string(),
         descricao: z.string(),
         preco: z.string().transform((value) => parseFloat(value)),
+        image: z.string().or(z.undefined()),
       })
       .safeParse(request.body);
 
     if (error)
       return response.render("dashboard/products/edit", { layout: "_layout", errors: ErrorParser.zodToApi(error), form: request.body });
+
+		console.log(request.file)
+    if (request.file) {
+      const base64Image = request.file.buffer!.toString("base64");
+
+      body.image = `data:${request.file.mimetype};base64,${base64Image}`;
+    }
 
     const updatedProduct = await ProductService.update(product, body);
 
@@ -81,8 +89,8 @@ export class DashboardProductController {
 
   private static async _destroy(request: Request, response: Response) {
     const product = await ProductService.findById(request.params.id);
-console.log(request.params.id)
-console.log(product)
+    console.log(request.params.id);
+    console.log(product);
     if (!product)
       return response.render("dashboard/products", {
         layout: "_layout",
@@ -91,7 +99,7 @@ console.log(product)
 
     const deletedProduct = await ProductService.delete(product);
 
-    console.log("odio")
+    console.log("odio");
     return response.redirect("/dashboard/products");
   }
 

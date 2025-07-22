@@ -93,16 +93,24 @@
 			background: var(--roxo);
 		}
 
-		.card {
+		.card-container {
 			background: var(--branco);
 			border-radius: 16px;
 			padding: 24px;
 			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 			max-width: 600px;
-			width:
-				100%;
+			width: 100%;
 			margin-bottom: 24px;
+			display: grid;
+			grid-auto-flow: column;
+			grid-template-columns: 120px 1fr;
+			justify-content: start;
+			gap: 1.5rem;
 		}
+
+		.card-container .product-card-image {}
+
+		.card {}
 
 		.card h2 {
 			font-size: 1.5rem;
@@ -146,24 +154,54 @@
 			border-radius: 12px;
 			padding: 16px 20px;
 			margin-bottom: 16px;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
+			display: grid;
+			grid-auto-flow: column;
+			justify-content: start;
+			gap: 1.5rem;
 			transition: box-shadow 0.2s;
+			cursor: pointer;
 		}
 
 		ul.products-list li:hover {
 			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 		}
 
-		ul.products-list li a {
+		ul.products-list li .product-title {
+			font-size: 18px;
 			color: var(--roxo);
-			font-weight: 600;
+			font-weight:
+				600;
 			text-decoration: none;
 		}
 
-		ul.products-list li a:hover {
+		ul.products-list li .product-title:hover {
 			text-decoration: underline;
+		}
+
+		.product-card-image {
+			width:
+				120px;
+			aspect-ratio: 1 / 1;
+			object-fit: cover;
+			border-radius: inherit;
+			border: 2px solid var(--roxo);
+		}
+
+		.product-data {
+			display: grid;
+			grid-template-rows: max-content 1fr max-content;
+			gap: 0.5rem;
+		}
+
+		.product-data p {
+			display: -webkit-box;
+			-webkit-line-clamp: 3;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			line-height: 1.4em;
+			max-height: calc(1.4em * 3);
+			word-break: break-word;
 		}
 	</style>
 </head>
@@ -182,76 +220,91 @@
 		Adicionar Produto
 	</a>
 
+
+
 	{{#if product}}
-	<div class="card">
-		<h2>
-			Produto
-		</h2>
-		<p>
-			<strong>
-				Nome:
-			</strong>
-			{{product.name}}
-		</p>
-		<p>
-			<strong>
-				Descrição:
-			</strong>
-			{{product.descricao}}
-		</p>
-		<p>
-			<strong>
-				Preço:
-			</strong>
-			R$
-			{{product.preco}}
-		</p>
-		<a href="/dashboard/products/edit/{{product.id}}">
-			Editar
-		</a>
-		<a href="/api/dashboard/products/delete/{{product.id}}" class="delete-product" data-id="{{product.id}}">
-			Deletar
-		</a>
-		<a href="/dashboard/products">
-			Voltar
-		</a>
+	<div class="card-container">
+		{{#if product.image}}
+		<img class="product-card-image" src="{{product.image}}" alt="" />
+		{{else}}
+		<img class="product-card-image" src="/static/images/product-image-placeholder.png" alt="" />
+		{{/if}}
+
+		<div class="card">
+			<h2>
+				Produto
+			</h2>
+			<p>
+				<strong>
+					Nome:
+				</strong>
+				{{product.name}}
+			</p>
+			<p>
+				<strong>
+					Descrição:
+				</strong>
+				{{product.descricao}}
+			</p>
+			<p>
+				<strong>
+					Preço:
+				</strong>
+				R$
+				{{product.preco}}
+			</p>
+			<a href="/dashboard/products/edit/{{product.id}}">
+				Editar
+			</a>
+			<a href="/api/dashboard/products/delete/{{product.id}}" class="delete-product" data-id="{{product.id}}">
+				Deletar
+			</a>
+			<a href="/dashboard/products">
+				Voltar
+			</a>
+		</div>
 	</div>
 	{{else if productsWithPagination}}
 	<ul class="products-list">
 		{{#each productsWithPagination.products}}
-		<li>
-			<a href="/dashboard/products/show/{{this.id}}">
-				{{this.name}}
-			</a>
-			<span>
-				R$
-				{{this.preco}}
-			</span>
+		<li onclick="goTo('/dashboard/products/show/{{this.id}}')">
+			{{#if this.image}}
+			<img class="product-card-image" src="{{this.image}}" alt="" />
+			{{else}}
+			<img class="product-card-image" src="/static/images/product-image-placeholder.png" alt="" />
+			{{/if}}
+			<div class="product-data">
+				<h3 class="product-title">
+					{{this.name}}
+				</h3>
+				<p>
+					{{this.descricao}}
+				</p>
+				<span>
+					R$
+					{{this.preco}}
+				</span>
+			</div>
 		</li>
 		{{/each}}
 	</ul>
 	{{/if}}
 
 	<script>
-		const button = document.querySelector(".delete-product");
-		
-		if (button) {
+		function goTo(url) {
+			window.location.href = url
+		}
+
+		const button = document.querySelector(".delete-product"); if (button) {
 			button.addEventListener("click", (event) => {
 				const id =
-					event.currentTarget.dataset.id;
-
-				try {
-					const xhttp = new XMLHttpRequest();
-					xhttp.onreadystatechange = async function (event) {
-						console.log(this.response)
-					};
-					xhttp.open("DELETE", `/api/dashboard/products/delete/${id}`, true);
-					xhttp.send();
-
-
-				} catch (error) {
-					alert(error.message)
-				}
+					event.currentTarget.dataset.id; try {
+						const xhttp = new XMLHttpRequest(); xhttp.onreadystatechange = async function (event) {
+							console.log(this.response)
+						}; xhttp.open("DELETE", `/api/dashboard/products/delete/${id}`, true); xhttp.send();
+					} catch (error) {
+						alert(error.message)
+					}
 			})
 		}
 	</script>

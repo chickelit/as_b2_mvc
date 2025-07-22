@@ -1,77 +1,266 @@
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Ame Açaí - Dashboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet" />
-    <style>
-      :root {
-        --roxo: #6d2e91;
-        --rosa: #ff4f81;
-        --verde: #60c28b;
-        --branco: #ffffff;
-        --cinza-claro: #f7f7f7;
-        --texto: #2d1e2f;
-      }
-      * { box-sizing: border-box; margin: 0; padding: 0; }
-      body {
-        font-family: 'Fredoka', sans-serif;
-        background: var(--cinza-claro);
-        color: var(--texto);
-        min-height: 100vh;
-        padding: 24px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      header { width: 100%; max-width: 960px; margin-bottom: 32px; text-align: center; }
-      header h1 { font-size: 2.5rem; color: var(--roxo); margin-bottom: 8px; }
-      header span { color: var(--rosa); }
-      nav ul { list-style: none; display: flex; justify-content: center; gap: 16px; margin-top: 12px; }
-      nav a { text-decoration: none; font-weight: 600; color: var(--roxo); padding: 8px 16px; border-radius: 8px; transition: 0.2s; }
-      nav a:hover { background-color: var(--roxo); color: var(--branco); }
-      .add-btn { display: inline-block; background: var(--rosa); color: var(--branco); padding: 12px 24px; border-radius: 12px; font-weight: 600; font-size: 1rem; text-decoration: none; margin-bottom: 32px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: background 0.2s; }
-      .add-btn:hover { background: var(--roxo); }
-      .card { background: var(--branco); border-radius: 16px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); max-width: 600px; width: 100%; margin-bottom: 24px; }
-      .card h2 { font-size: 1.5rem; color: var(--roxo); margin-bottom: 12px; }
-      .card p { margin-bottom: 8px; font-size: 1.05rem; }
-      .card a { display: inline-block; margin-top: 16px; margin-right: 12px; padding: 10px 20px; background: var(--verde); color: var(--branco); border-radius: 8px; text-decoration: none; font-weight: 600; transition: background 0.2s; }
-      .card a:hover { background: var(--roxo); }
-      ul.products-list { list-style: none; padding: 0; width: 100%; max-width: 600px; }
-      ul.products-list li { background: var(--branco); border: 1px solid #eee; border-radius: 12px; padding: 16px 20px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; transition: box-shadow 0.2s; }
-      ul.products-list li:hover { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
-      ul.products-list li a { color: var(--roxo); font-weight: 600; text-decoration: none; }
-      ul.products-list li a:hover { text-decoration: underline; }
-    </style>
-  </head>
-  <body>
-    <header>
-      <h1>Ame <span>Açaí</span></h1>
-      <nav>
-        <ul>
-          <li><a href="/sign-in">Adicionar Produtos</a></li>
-        </ul>
-      </nav>
-    </header>
 
-    {{#if product}}
-      <div class="card">
-        <h2>Produto</h2>
-        <p><strong>Nome:</strong> {{product.name}}</p>
-        <p><strong>Descrição:</strong> {{product.descricao}}</p>
-        <p><strong>Preço:</strong> R$ {{product.preco}}</p>
-        <a href="/">Voltar</a>
-      </div>
-      
-    {{else if productsWithPagination}}
-      <ul class="products-list">
-        {{#each productsWithPagination.products}}
-          <li>
-            <a href="/show/{{this.id}}">{{this.name}}</a>
-            <span>R$ {{this.preco}}</span>
-          </li>
-        {{/each}}
-      </ul>
-    {{/if}}
-  </body>
+<head>
+	<meta charset="UTF-8" />
+	<title>Ame Açaí - Dashboard</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet" />
+	<style>
+		:root {
+			--roxo: #6d2e91;
+			--rosa: #ff4f81;
+			--verde: #60c28b;
+			--branco: #ffffff;
+			--cinza-claro: #f7f7f7;
+			--texto: #2d1e2f;
+		}
+
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			font-family: 'Fredoka', sans-serif;
+			background: var(--cinza-claro);
+			color: var(--texto);
+			min-height: 100vh;
+			padding: 24px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		header {
+			width: 100%;
+			max-width: 960px;
+			margin-bottom: 32px;
+			text-align: center;
+		}
+
+		header h1 {
+			font-size: 2.5rem;
+			color: var(--roxo);
+			margin-bottom: 8px;
+		}
+
+		header span {
+			color: var(--rosa);
+		}
+
+		nav ul {
+			list-style: none;
+			display: flex;
+			justify-content: center;
+			gap: 16px;
+			margin-top: 12px;
+		}
+
+		nav a {
+			text-decoration: none;
+			font-weight: 600;
+			color: var(--roxo);
+			padding: 8px 16px;
+			border-radius: 8px;
+			transition: 0.2s;
+		}
+
+		nav a:hover {
+			background-color: var(--roxo);
+			color: var(--branco);
+		}
+
+		.add-btn {
+			display: inline-block;
+			background: var(--rosa);
+			color: var(--branco);
+			padding: 12px 24px;
+			border-radius: 12px;
+			font-weight: 600;
+			font-size: 1rem;
+			text-decoration: none;
+			margin-bottom: 32px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			transition: background 0.2s;
+		}
+
+		.add-btn:hover {
+			background: var(--roxo);
+		}
+
+
+		.card h2 {
+			font-size: 1.5rem;
+			color: var(--roxo);
+			margin-bottom: 12px;
+		}
+
+		.card p {
+			margin-bottom: 8px;
+			font-size: 1.05rem;
+		}
+
+		.card a {
+			display: inline-block;
+			margin-top: 16px;
+			margin-right: 12px;
+			padding: 10px 20px;
+			background: var(--verde);
+			color: var(--branco);
+			border-radius: 8px;
+			text-decoration: none;
+			font-weight: 600;
+			transition: background 0.2s;
+		}
+
+		.card a:hover {
+			background: var(--roxo);
+		}
+
+		ul.products-list {
+			list-style: none;
+			padding: 0;
+			width: 100%;
+			max-width: 600px;
+		}
+
+		ul.products-list li {
+			background: var(--branco);
+			border: 1px solid #eee;
+			border-radius: 12px;
+			padding: 16px 20px;
+			margin-bottom: 16px;
+			display: grid;
+			grid-auto-flow: column;
+			justify-content: start;
+			gap: 1.5rem;
+			transition: box-shadow 0.2s;
+			cursor: pointer;
+		}
+
+		ul.products-list li:hover {
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+		}
+
+
+		ul.products-list li .product-title {
+			font-size: 18px;
+			color: var(--roxo);
+			font-weight:
+				600;
+			text-decoration: none;
+		}
+
+		ul.products-list li .product-title:hover {
+			text-decoration: underline;
+		}
+
+		.card-container {
+			background: var(--branco);
+			border-radius: 16px;
+			padding: 24px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+			max-width: 600px;
+			width: 100%;
+			margin-bottom: 24px;
+			display: grid;
+			grid-auto-flow: column;
+			grid-template-columns: 120px 1fr;
+			justify-content: start;
+			gap: 1.5rem;
+		}
+
+		.card {}
+
+
+		.product-card-image {
+			width:
+				120px;
+			aspect-ratio: 1 / 1;
+			object-fit: cover;
+			border-radius: inherit;
+			border: 2px solid var(--roxo);
+		}
+
+		.product-data {
+			display: grid;
+			grid-template-rows: max-content 1fr max-content;
+			gap: 0.5rem;
+		}
+
+		.product-data p {
+			display: -webkit-box;
+			-webkit-line-clamp: 3;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			line-height: 1.4em;
+			max-height: calc(1.4em * 3);
+			word-break: break-word;
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<h1>Ame <span>Açaí</span></h1>
+		<nav>
+			<ul>
+				<li><a href="/sign-in">Adicionar Produtos</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	{{#if product}}
+	<div class="card-container">
+		{{#if product.image}}
+		<img class="product-card-image" src="{{product.image}}" alt="" />
+		{{else}}
+		<img class="product-card-image" src="/static/images/product-image-placeholder.png" alt="" />
+		{{/if}}
+		<div class="card">
+			<h2>Produto</h2>
+			<p><strong>Nome:</strong> {{product.name}}</p>
+			<p><strong>Descrição:</strong> {{product.descricao}}</p>
+			<p><strong>Preço:</strong> R$ {{product.preco}}</p>
+			<a href="/">Voltar</a>
+		</div>
+	</div>
+
+	{{else if productsWithPagination}}
+	<ul class="products-list">
+		{{#each productsWithPagination.products}}
+		<li onclick="goTo('/show/{{this.id}}')">
+			{{#if this.image}}
+			<img class="product-card-image" src="{{this.image}}" alt="" />
+			{{else}}
+			<img class="product-card-image" src="/static/images/product-image-placeholder.png" alt="" />
+			{{/if}}
+
+			<div class="product-data">
+				<h3 class="product-title">
+					{{this.name}}
+				</h3>
+				<p>
+					{{this.descricao}}
+				</p>
+				<span>
+					R$
+					{{this.preco}}
+				</span>
+			</div>
+		</li>
+		{{/each}}
+	</ul>
+	{{/if}}
+
+	<script>
+		function goTo(url) {
+			window.location.href = url
+		}
+
+	</script>
+</body>
+
 </html>
